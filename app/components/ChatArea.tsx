@@ -1,5 +1,7 @@
-import { useEffect, useRef } from "react";
-import { Lock, User, MessageSquareDashed, Zap } from "lucide-react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { Lock, User, MessageSquareDashed, Zap, Copy, Check } from "lucide-react";
 
 export interface Message {
   type: string;
@@ -28,6 +30,7 @@ export function ChatArea({
   sendMessage
 }: ChatAreaProps) {
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const el = messagesContainerRef.current;
@@ -35,8 +38,14 @@ export function ChatArea({
     el.scrollTop = el.scrollHeight;
   }, [messages]);
 
+  function copyRoomId() {
+    navigator.clipboard.writeText(roomId);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
   return (
-    <div className="flex-1 min-h-0 mt-13 glass-panel rounded-sm flex flex-col overflow-hidden">
+    <div className="flex-1 mt-13 min-h-0 glass-panel rounded-sm flex flex-col overflow-hidden">
 
       {/* ── HEADER ── */}
       <div className="px-6 py-4 border-b border-cyan-500/20 bg-black/60 flex items-center justify-between shrink-0 relative">
@@ -44,9 +53,22 @@ export function ChatArea({
         <span className="absolute bottom-0 right-0 w-8 h-px bg-linear-to-l from-violet-500/60 to-transparent" />
 
         <div>
-          <h2 className="text-lg font-bold tracking-widest uppercase text-cyan-400 font-mono">
-            <span className="text-violet-500/85 mr-1">/</span> {roomId}
-          </h2>
+          <div className="flex items-center gap-2">
+            <h2 className="text-lg font-bold tracking-widest uppercase text-cyan-400 font-mono">
+              <span className="text-violet-500/85 mr-1">/</span> {roomId}
+            </h2>
+            <button
+              onClick={copyRoomId}
+              className="group flex items-center justify-center w-6 h-6 border border-cyan-500/20
+                hover:border-cyan-400/50 hover:bg-cyan-950/40 transition-all duration-200 shrink-0"
+              title="Copy Room ID"
+            >
+              {copied
+                ? <Check className="w-3 h-3 text-cyan-400" />
+                : <Copy className="w-3 h-3 text-cyan-500/40 group-hover:text-cyan-400 transition-colors" />
+              }
+            </button>
+          </div>
           <p className="flex items-center gap-1.5 text-[11px] text-cyan-500/60 mt-1 font-mono tracking-widest uppercase">
             <Lock className="w-3 h-3" /> Encrypted P2P Link
           </p>
@@ -81,7 +103,7 @@ export function ChatArea({
                   text-cyan-400/70 bg-black/20 px-4 py-1.5
                   border border-cyan-500/20">
                   <Zap className="w-3 h-3 text-cyan-400/50 shrink-0" />
-                  <span className="wrap-break-word">{msg.message}</span>
+                  <span className="break-words">{msg.message}</span>
                 </span>
               </div>
             );
@@ -102,7 +124,7 @@ export function ChatArea({
               </div>
 
               <div className={`px-4 py-2.5 max-w-[78%] min-w-0 text-sm font-mono leading-relaxed
-                border relative wrap-break-word overflow-hidden
+                border relative break-words overflow-hidden
                 ${isMe
                   ? "bg-cyan-950/30 text-cyan-100 border-cyan-500/30 rounded-sm rounded-tr-none"
                   : "bg-violet-950/25 text-violet-100 border-violet-500/25 rounded-sm rounded-tl-none"
@@ -120,7 +142,7 @@ export function ChatArea({
 
       {/* ── INPUT BAR ── */}
       <div className="p-4 bg-black/60 border-t border-cyan-500/15 relative shrink-0">
-        <span className="absolute top-0 left-0 w-12 h-px bg-linear-to-r from-cyan-400/40 to-transparent" />
+        <span className="absolute top-0 left-0 w-12 h-px bg-gradient-to-r from-cyan-400/40 to-transparent" />
 
         <form
           onSubmit={e => { e.preventDefault(); sendMessage(); }}
