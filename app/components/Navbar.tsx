@@ -32,7 +32,7 @@ export function Navbar() {
             {/* top accent line */}
             <div className="h-px w-full bg-linear-to-r from-transparent via-cyan-400/50 to-transparent" />
 
-            <div className="max-w-6xl mx-auto px-4 sm:px-8 h-13 flex items-center justify-between gap-4">
+            <div className="max-w-6xl mx-auto px-4 sm:px-8 h-12 flex items-center justify-between gap-4">
 
                 {/* ── LEFT: LOGO ── */}
                 <div className="flex items-center gap-3 shrink-0">
@@ -47,7 +47,7 @@ export function Navbar() {
               ${glitch ? "text-red-400 skew-x-3 translate-x-px" : "text-cyan-400"}`}>
                             Nexus<span className={`${glitch ? "text-cyan-400" : "text-violet-400"}`}>_</span>Chat
                         </span>
-                        <span className="font-mono text-[7px] tracking-[0.25em] text-cyan-500/30 uppercase">
+                        <span className="font-mono text-[7px] tracking-[0.25em] text-cyan-500/80 uppercase">
                             mesh_protocol_v2
                         </span>
                     </div>
@@ -55,15 +55,15 @@ export function Navbar() {
 
                 {/* ── CENTER: STATUS PILLS ── */}
                 <div className="hidden sm:flex items-center gap-3">
-                    <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase text-cyan-400/50 border border-cyan-500/15 px-2.5 py-1">
+                    <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase text-cyan-400/80 border border-cyan-500/15 px-2.5 py-1">
                         <Radio className="w-2.5 h-2.5" />
                         P2P_LINK
                     </span>
-                    <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase text-violet-400/50 border border-violet-500/15 px-2.5 py-1">
+                    <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase text-violet-400/80 border border-violet-500/15 px-2.5 py-1">
                         <Shield className="w-2.5 h-2.5" />
                         ENC_ACTIVE
                     </span>
-                    <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase text-cyan-400/50 border border-cyan-500/15 px-2.5 py-1">
+                    <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase text-cyan-400/80 border border-cyan-500/15 px-2.5 py-1">
                         <Terminal className="w-2.5 h-2.5" />
                         NODE_ONLINE
                     </span>
@@ -75,14 +75,14 @@ export function Navbar() {
                         <span className="font-mono text-xs text-cyan-400/70 tracking-widest tabular-nums">
                             {time}
                         </span>
-                        <span className="font-mono text-[7px] tracking-[0.2em] text-cyan-500/25 uppercase">
+                        <span className="font-mono text-[7px] tracking-[0.2em] text-cyan-500/80 uppercase">
                             sys_clock
                         </span>
                     </div>
                     {/* signal bars */}
                     <div className="flex items-end gap-px h-4">
                         {[2, 3, 4, 5, 6].map((h, i) => (
-                            <span key={i} className="w-1 bg-cyan-400/50 rounded-none"
+                            <span key={i} className="w-1 bg-cyan-400/80 rounded-none"
                                 style={{ height: `${h * 2}px`, opacity: i < 4 ? 1 : 0.2 }} />
                         ))}
                     </div>
