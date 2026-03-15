@@ -26,9 +26,9 @@ class Ray {
         else if (edge === 1) { this.x = this.w; this.y = Math.floor(Math.random() * rows) * CELL; this.dx = -1; this.dy = 0; }
         else if (edge === 2) { this.x = Math.floor(Math.random() * cols) * CELL; this.y = this.h; this.dx = 0; this.dy = -1; }
         else { this.x = 0; this.y = Math.floor(Math.random() * rows) * CELL; this.dx = 1; this.dy = 0; }
-        this.speed = CELL / (8 + Math.random() * 12);
+        this.speed = CELL / (40 + Math.random() * 40);
         this.trail = [];
-        this.maxTrail = 10 + Math.floor(Math.random() * 14);
+        this.maxTrail = 100 + Math.floor(Math.random() * 100);
         this.color = Math.random() > 0.4 ? CYAN : VIOLET;
         this.distToTurn = CELL;
         this.alive = true;
