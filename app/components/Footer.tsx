@@ -5,7 +5,7 @@ export function Footer() {
     return (
         <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-violet-500/15 bg-black/70 backdrop-blur-md">
 
-            <div className="max-w-6xl mx-auto px-4 sm:px-8 h-10 flex items-center justify-between gap-4">
+            <div className="max-w-7xl mx-auto px-4 sm:px-8 h-10 flex items-center justify-between gap-4">
 
                 {/* ── LEFT: BUILD TAG ── */}
                 <div className="flex items-center gap-2">
@@ -59,7 +59,7 @@ export function Footer() {
             <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-violet-500/35 pointer-events-none" />
 
             {/* bottom accent line */}
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
+            <div className="h-px w-full bg-linear-to-r from-transparent via-violet-500/30 to-transparent" />
         </footer>
     );
 }
