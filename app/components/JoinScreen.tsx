@@ -20,7 +20,7 @@ export function JoinScreen({
   joinRoom,
 }: JoinScreenProps) {
   return (
-    <div className="glass-panel w-full max-w-md p-8 rounded-none flex flex-col gap-6 relative z-10 animate-fade-in">
+    <div className="glass-panel w-full max-w-md mt-13 p-8 rounded-none flex flex-col gap-6 relative z-10 animate-fade-in">
 
       {/* corner bracket decorations */}
       <span className="absolute top-0 left-0 w-5 h-5 border-t border-l border-cyan-400/90 pointer-events-none" />
