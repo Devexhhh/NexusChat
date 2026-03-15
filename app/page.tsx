@@ -6,6 +6,7 @@ import { ChatArea, Message } from "./components/ChatArea";
 import { Sidebar } from "./components/Sidebar";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
+import { CircuitGrid } from "./components/CircuitGrid";
 
 export default function Home() {
 
@@ -57,12 +58,8 @@ export default function Home() {
     <div className="h-screen overflow-hidden flex flex-col bg-[#03000a] text-[#e0d0ff] selection:bg-cyan-500/20 font-mono relative">
 
       {/* ── GRID OVERLAY ── */}
-      <div className="pointer-events-none fixed inset-0 z-0" style={{
-        backgroundImage: `
-          repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,255,200,0.025) 40px),
-          repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,255,200,0.025) 40px)
-        `
-      }} />
+      {/* <div className="pointer-events-none fixed inset-0 z-0 grid-bg" /> */}
+      <CircuitGrid />
 
       {/* ── AMBIENT GLOWS ── */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
@@ -80,8 +77,8 @@ export default function Home() {
       {/* ── CORNER BRACKETS ── */}
       <span className="hidden sm:block pointer-events-none fixed top-16 left-4 w-8 h-8 border-t-2 border-l-2 border-cyan-400/30 z-40" />
       <span className="hidden sm:block pointer-events-none fixed top-16 right-4 w-8 h-8 border-t-2 border-r-2 border-cyan-400/30 z-40" />
-      <span className="hidden sm:block pointer-events-none fixed bottom-16 left-4 w-8 h-8 border-b-2 border-l-2 border-violet-500/30 z-40" />
-      <span className="hidden sm:block pointer-events-none fixed bottom-16 right-4 w-8 h-8 border-b-2 border-r-2 border-violet-500/30 z-40" />
+      <span className="hidden sm:block pointer-events-none fixed bottom-17 left-4 w-8 h-8 border-b-2 border-l-2 border-violet-500/30 z-40" />
+      <span className="hidden sm:block pointer-events-none fixed bottom-17 right-4 w-8 h-8 border-b-2 border-r-2 border-violet-500/30 z-40" />
 
       {/* ── NAVBAR ── */}
       <Navbar />
