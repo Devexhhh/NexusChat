@@ -8,7 +8,7 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
-  title: "Nexus Chat | Web3 Native Realtime Messaging",
+  title: "Nexus Chat",
   description: "A fast, modern websocket chat client",
 };
 
