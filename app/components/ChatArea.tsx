@@ -41,8 +41,8 @@ export function ChatArea({
       {/* ── HEADER ── */}
       <div className="px-6 py-4 border-b border-cyan-500/20 bg-black/60 flex items-center justify-between shrink-0 relative">
         {/* corner accent */}
-        <span className="absolute top-0 left-0 w-8 h-px bg-gradient-to-r from-cyan-400 to-transparent" />
-        <span className="absolute bottom-0 right-0 w-8 h-px bg-gradient-to-l from-violet-500/60 to-transparent" />
+        <span className="absolute top-0 left-0 w-8 h-px bg-linear-to-r from-cyan-400 to-transparent" />
+        <span className="absolute bottom-0 right-0 w-8 h-px bg-linear-to-l from-violet-500/60 to-transparent" />
 
         <div>
           <h2 className="text-lg font-bold tracking-widest uppercase text-cyan-400 font-mono">
@@ -78,9 +78,9 @@ export function ChatArea({
           if (msg.type === "system") {
             return (
               <div key={i} className="flex justify-center my-3 animate-fade-in">
-                <span className="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase
-                  text-cyan-400/50 bg-black/50 px-4 py-1.5
-                  border border-cyan-500/15">
+                <span className="flex items-center gap-2 text-[12px] font-mono tracking-tight uppercase
+                  text-cyan-400/85 bg-black/10 px-5 py-2
+                  border border-cyan-500/30">
                   <Zap className="w-3 h-3 text-cyan-400/60" /> {msg.message}
                 </span>
               </div>
