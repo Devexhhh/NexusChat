@@ -30,9 +30,9 @@ export function Navbar() {
     return (
         <header className="fixed top-0 left-0 right-0 z-50 border-b border-cyan-500/15 bg-black/70 backdrop-blur-md">
             {/* top accent line */}
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+            <div className="h-px w-full bg-linear-to-r from-transparent via-cyan-400/50 to-transparent" />
 
-            <div className="max-w-6xl mx-auto px-4 sm:px-8 h-12 flex items-center justify-between gap-4">
+            <div className="max-w-6xl mx-auto px-4 sm:px-8 h-13 flex items-center justify-between gap-4">
 
                 {/* ── LEFT: LOGO ── */}
                 <div className="flex items-center gap-3 shrink-0">
@@ -92,6 +92,6 @@ export function Navbar() {
             {/* bottom corner notches */}
             <span className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-cyan-400/40 pointer-events-none" />
             <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-cyan-400/40 pointer-events-none" />
-        </header>
+        </header >
     );
 }
