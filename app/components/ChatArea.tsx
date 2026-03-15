@@ -1,5 +1,5 @@
-import { ReactElement, useEffect, useRef } from "react";
-import { Lock, User, MessageSquareDashed, Zap, Send } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Lock, User, MessageSquareDashed, Zap } from "lucide-react";
 
 export interface Message {
   type: string;
@@ -36,11 +36,10 @@ export function ChatArea({
   }, [messages]);
 
   return (
-    <div className="flex-1 h-full min-h-0 glass-panel rounded-sm flex flex-col overflow-hidden">
+    <div className="flex-1 min-h-0 mt-13 glass-panel rounded-sm flex flex-col overflow-hidden">
 
       {/* ── HEADER ── */}
       <div className="px-6 py-4 border-b border-cyan-500/20 bg-black/60 flex items-center justify-between shrink-0 relative">
-        {/* corner accent */}
         <span className="absolute top-0 left-0 w-8 h-px bg-linear-to-r from-cyan-400 to-transparent" />
         <span className="absolute bottom-0 right-0 w-8 h-px bg-linear-to-l from-violet-500/60 to-transparent" />
 
@@ -48,17 +47,17 @@ export function ChatArea({
           <h2 className="text-lg font-bold tracking-widest uppercase text-cyan-400 font-mono">
             <span className="text-violet-500/85 mr-1">/</span> {roomId}
           </h2>
-          <p className="flex items-center gap-1.5 text-[13px] text-cyan-500/85 mt-1 font-mono tracking-tight uppercase">
+          <p className="flex items-center gap-1.5 text-[11px] text-cyan-500/60 mt-1 font-mono tracking-widest uppercase">
             <Lock className="w-3 h-3" /> Encrypted P2P Link
           </p>
         </div>
 
         <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase font-mono
-          text-violet-300 bg-violet-950/40 px-8 py-3
-          border border-violet-500/30
-          clip-path-[polygon(8px_0%,100%_0%,calc(100%-8px)_100%,0%_100%)]">
+          text-violet-300 bg-violet-950/40 px-4 py-2
+          border border-violet-500/30">
           <User className="w-3.5 h-3.5 text-cyan-400" />
-          <span className="text-cyan-400/80">&gt;</span> {username}
+          <span className="text-cyan-400/80">&gt;</span>
+          <span className="max-w-30 truncate">{username}</span>
         </div>
       </div>
 
@@ -78,10 +77,11 @@ export function ChatArea({
           if (msg.type === "system") {
             return (
               <div key={i} className="flex justify-center my-3 animate-fade-in">
-                <span className="flex items-center gap-2 text-[12px] font-mono tracking-tight uppercase
-                  text-cyan-400/85 bg-black/10 px-5 py-2
-                  border border-cyan-500/30">
-                  <Zap className="w-3 h-3 text-cyan-400/60" /> {msg.message}
+                <span className="flex items-center gap-2 text-[11px] font-mono tracking-widest uppercase
+                  text-cyan-400/70 bg-black/20 px-4 py-1.5
+                  border border-cyan-500/20">
+                  <Zap className="w-3 h-3 text-cyan-400/50 shrink-0" />
+                  <span className="wrap-break-word">{msg.message}</span>
                 </span>
               </div>
             );
@@ -89,25 +89,28 @@ export function ChatArea({
 
           const isMe = msg.username === username;
           return (
-            <div key={i} className={`flex flex-col ${isMe ? "items-end" : "items-start"} animate-fade-in`}>
+            <div
+              key={i}
+              className={`flex flex-col min-w-0 ${isMe ? "items-end" : "items-start"} animate-fade-in`}
+            >
               <div className="flex items-baseline gap-2 mb-1.5">
                 <span className={`text-[10px] font-mono font-bold tracking-widest uppercase
                   ${isMe ? "text-cyan-400" : "text-violet-400"}`}>
                   {isMe ? ">" : "<"} {msg.username}
                 </span>
-                <span className="text-[10px] text-cyan-500/70 font-mono">{msg.time}</span>
+                <span className="text-[9px] text-cyan-500/40 font-mono">{msg.time}</span>
               </div>
 
-              <div className={`px-4 py-2.5 max-w-[78%] text-md font-mono leading-relaxed
-                border relative
+              <div className={`px-4 py-2.5 max-w-[78%] min-w-0 text-sm font-mono leading-relaxed
+                border relative wrap-break-word overflow-hidden
                 ${isMe
                   ? "bg-cyan-950/30 text-cyan-100 border-cyan-500/30 rounded-sm rounded-tr-none"
                   : "bg-violet-950/25 text-violet-100 border-violet-500/25 rounded-sm rounded-tl-none"
                 }`}
               >
-                {/* corner pip */}
                 <span className={`absolute top-0 w-2 h-px
-                  ${isMe ? "right-0 bg-cyan-400" : "left-0 bg-violet-400"}`} />
+                  ${isMe ? "right-0 bg-cyan-400" : "left-0 bg-violet-400"}`}
+                />
                 {msg.message}
               </div>
             </div>
@@ -123,10 +126,10 @@ export function ChatArea({
           onSubmit={e => { e.preventDefault(); sendMessage(); }}
           className="flex gap-3 items-center"
         >
-          <div className="relative flex-1">
+          <div className="relative flex-1 min-w-0">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-500/40 font-mono text-xs select-none">_</span>
             <input
-              className="glass-input w-full pl-7 pr-4 py-2.5 text-[15px] tracking-normal font-mono rounded-none"
+              className="glass-input w-full pl-7 pr-4 py-2.5 text-sm font-mono rounded-none"
               placeholder="<transmit message>"
               value={input}
               onChange={e => setInput(e.target.value)}
@@ -136,13 +139,11 @@ export function ChatArea({
 
           <button
             type="submit"
-            className="modern-button text-[15px]"
+            className="modern-button shrink-0"
             disabled={!connected || !input.trim()}
           >
             <span className="btn-ring" />
-            <span className="btn-inner flex items-center gap-2">
-              Send
-            </span>
+            <span className="btn-inner flex items-center gap-2">Send</span>
             <span className="btn-glitch r flex items-center gap-2">Send</span>
             <span className="btn-glitch c flex items-center gap-2">Send</span>
           </button>
