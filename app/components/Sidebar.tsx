@@ -5,7 +5,7 @@ interface SidebarProps {
 
 export function Sidebar({ users, username }: SidebarProps) {
   return (
-    <div className="w-72 h-full min-h-0 glass-panel rounded-none flex flex-col overflow-hidden hidden lg:flex relative">
+    <div className="w-72 mt-13 min-h-0 glass-panel rounded-none flex-col overflow-hidden hidden lg:flex relative">
 
       {/* corner brackets */}
       <span className="absolute top-0 left-0 w-5 h-5 border-t border-l border-cyan-400/90 pointer-events-none z-10" />
