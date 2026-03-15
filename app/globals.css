@@ -353,3 +353,23 @@ body {
     pointer-events: none;
   }
 }
+
+/* globals.css */
+.grid-bg {
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(0, 255, 200, 0.07) 30px),
+    repeating-linear-gradient(90deg, transparent, transparent 29px, rgba(0, 255, 200, 0.07) 30px);
+  animation: gridPulse 3s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
