@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ── ROOT TOKENS ─────────────────────────────────────────── */
+
+:root {
+  --background: #03000a;
+  --foreground: #e0d0ff;
+
+  --cyan: #00ffc8;
+  --cyan-dim: rgba(0, 255, 200, 0.18);
+  --cyan-ghost: rgba(0, 255, 200, 0.06);
+  --violet: #c084fc;
+  --violet-dim: rgba(139, 92, 246, 0.4);
+  --violet-deep: rgba(88, 28, 135, 0.25);
+  --red-glitch: rgba(255, 50, 100, 0.7);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Rajdhani', var(--font-raleway), sans-serif;
+  --font-mono: 'Share Tech Mono', ui-monospace, 'Courier New', monospace;
+  --color-cyan-400: #00ffc8;
+  --color-cyan-500: #00d4a8;
+  --color-cyan-950: #001a14;
+  --color-violet-400: #c084fc;
+  --color-violet-500: #a855f7;
+  --color-violet-950: #0d0020;
+}
+
+/* ── BASE ────────────────────────────────────────────────── */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* grid overlay */
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0, 255, 200, 0.025) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0, 255, 200, 0.025) 40px);
+}
+
+/* ── GLASS PANEL ─────────────────────────────────────────── */
+@utility glass-panel {
+  background-color: rgba(10, 2, 20, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 200, 0.12);
+  border-radius: 4px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 24px rgba(0, 255, 200, 0.04);
+  position: relative;
+
+  /* top-left cyan accent line */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+  }
+
+  /* bottom-right violet accent line */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 36px;
+    height: 1px;
+    background: linear-gradient(270deg, rgba(139, 92, 246, 0.6), transparent);
+  }
+}
+
+/* ── GLASS INPUT ─────────────────────────────────────────── */
+@utility glass-input {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 255, 200, 0.18);
+  color: var(--foreground);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: rgba(139, 92, 246, 0.4);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: rgba(10, 2, 20, 0.7);
+    border-color: rgba(0, 255, 200, 0.6);
+    color: var(--cyan);
+    box-shadow: 0 0 14px rgba(0, 255, 200, 0.1), inset 0 0 8px rgba(0, 255, 200, 0.03);
+  }
+}
+
+/* ── MODERN BUTTON ───────────────────────────────────────── */
+@utility modern-button {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--violet);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  transition: color 0.3s ease;
+
+  & .btn-inner {
+    display: block;
+    padding: 0.6rem 2rem;
+    position: relative;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    background: var(--violet-deep);
+    border: 1px solid var(--violet-dim);
+    transition: background 0.3s ease, border-color 0.3s ease;
+    z-index: 1;
+  }
+
+  /* corner bracket notches */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-color: rgba(167, 139, 250, 0.7);
+    border-style: solid;
+    transition: border-color 0.3s ease;
+    z-index: 2;
+  }
+
+  &::before {
+    top: -1px;
+    left: 5px;
+    border-width: 2px 0 0 2px;
+  }
+
+  &::after {
+    bottom: -1px;
+    right: 5px;
+    border-width: 0 2px 2px 0;
+  }
+
+  /* chromatic glitch layers */
+  & .btn-glitch {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    font-weight: 700;
+    font-size: inherit;
+    letter-spacing: inherit;
+    text-transform: uppercase;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  & .btn-glitch.r {
+    color: var(--red-glitch);
+    transform: translateX(-2px);
+  }
+
+  & .btn-glitch.c {
+    color: rgba(0, 255, 200, 0.7);
+    transform: translateX(2px);
+  }
+
+  /* pulse ring */
+  & .btn-ring {
+    position: absolute;
+    inset: -4px;
+    clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+    border: 1px solid rgba(0, 255, 200, 0);
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+  }
+
+  /* hover */
+  &:hover {
+    color: var(--cyan);
+  }
+
+  &:hover .btn-inner {
+    background: var(--cyan-dim);
+    border-color: rgba(0, 255, 200, 0.7);
+    box-shadow: 0 0 12px rgba(0, 255, 200, 0.2), inset 0 0 20px var(--cyan-ghost);
+  }
+
+  &:hover::before,
+  &:hover::after {
+    border-color: var(--cyan);
+  }
+
+  &:hover .btn-glitch {
+    animation: glitchFlicker 0.4s steps(1) infinite;
+  }
+
+  &:hover .btn-glitch.c {
+    animation-delay: 0.05s;
+  }
+
+  &:hover .btn-ring {
+    border-color: rgba(0, 255, 200, 0.25);
+    animation: ringPulse 1.2s ease-out infinite;
+  }
+
+  /* active */
+  &:active .btn-inner {
+    background: rgba(0, 255, 200, 0.18);
+    box-shadow: 0 0 24px rgba(0, 255, 200, 0.4), inset 0 0 30px rgba(0, 255, 200, 0.1);
+  }
+
+  /* disabled */
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+    animation: none;
+  }
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────────── */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility scrollbar-cyber {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 200, 0.2) transparent;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 200, 0.2);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 200, 0.45);
+  }
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes glitchFlicker {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.8;
+    transform: translateX(-3px) skewX(-2deg);
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0.6;
+    transform: translateX(3px) skewX(1deg);
+  }
+
+  40% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 0.4;
+    transform: translateX(-1px);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes ringPulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    top: -2px;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+@utility animate-fade-in {
+  animation: fadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@utility animate-scanline {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 200, 0.35), transparent);
+    top: -2px;
+    animation: scanline 5s linear infinite;
+    pointer-events: none;
+  }
+}
