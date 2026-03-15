@@ -126,8 +126,8 @@ export function ChatArea({
           <div className="relative flex-1">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-500/40 font-mono text-xs select-none">_</span>
             <input
-              className="glass-input w-full pl-7 pr-4 py-2.5 text-[15px] font-mono rounded-none"
-              placeholder="transmit message..."
+              className="glass-input w-full pl-7 pr-4 py-2.5 text-[15px] tracking-normal font-mono rounded-none"
+              placeholder="<transmit message>"
               value={input}
               onChange={e => setInput(e.target.value)}
               disabled={!connected}
