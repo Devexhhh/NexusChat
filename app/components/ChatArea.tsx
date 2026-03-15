@@ -46,15 +46,15 @@ export function ChatArea({
 
         <div>
           <h2 className="text-lg font-bold tracking-widest uppercase text-cyan-400 font-mono">
-            <span className="text-violet-500/60 mr-1">/</span> {roomId}
+            <span className="text-violet-500/85 mr-1">/</span> {roomId}
           </h2>
-          <p className="flex items-center gap-1.5 text-[10px] text-cyan-500/40 mt-1 font-mono tracking-widest uppercase">
+          <p className="flex items-center gap-1.5 text-[13px] text-cyan-500/85 mt-1 font-mono tracking-tight uppercase">
             <Lock className="w-3 h-3" /> Encrypted P2P Link
           </p>
         </div>
 
         <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase font-mono
-          text-violet-300 bg-violet-950/40 px-4 py-1.5
+          text-violet-300 bg-violet-950/40 px-8 py-3
           border border-violet-500/30
           clip-path-[polygon(8px_0%,100%_0%,calc(100%-8px)_100%,0%_100%)]">
           <User className="w-3.5 h-3.5 text-cyan-400" />
@@ -68,9 +68,9 @@ export function ChatArea({
         className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-5 scrollbar-cyber"
       >
         {messages.length === 0 && (
-          <div className="flex flex-col items-center justify-center h-full text-cyan-500/20 space-y-3">
+          <div className="flex flex-col items-center justify-center h-full text-cyan-500/30 space-y-3">
             <MessageSquareDashed className="w-14 h-14" />
-            <p className="font-mono text-xs tracking-widest uppercase">_ awaiting transmission</p>
+            <p className="font-extralight text-xs tracking-widest uppercase">_ awaiting transmission</p>
           </div>
         )}
 
@@ -95,10 +95,10 @@ export function ChatArea({
                   ${isMe ? "text-cyan-400" : "text-violet-400"}`}>
                   {isMe ? ">" : "<"} {msg.username}
                 </span>
-                <span className="text-[9px] text-cyan-500/30 font-mono">{msg.time}</span>
+                <span className="text-[10px] text-cyan-500/70 font-mono">{msg.time}</span>
               </div>
 
-              <div className={`px-4 py-2.5 max-w-[78%] text-sm font-mono leading-relaxed
+              <div className={`px-4 py-2.5 max-w-[78%] text-md font-mono leading-relaxed
                 border relative
                 ${isMe
                   ? "bg-cyan-950/30 text-cyan-100 border-cyan-500/30 rounded-sm rounded-tr-none"
@@ -126,7 +126,7 @@ export function ChatArea({
           <div className="relative flex-1">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-500/40 font-mono text-xs select-none">_</span>
             <input
-              className="glass-input w-full pl-7 pr-4 py-2.5 text-sm font-mono rounded-none"
+              className="glass-input w-full pl-7 pr-4 py-2.5 text-[15px] font-mono rounded-none"
               placeholder="transmit message..."
               value={input}
               onChange={e => setInput(e.target.value)}
@@ -136,15 +136,15 @@ export function ChatArea({
 
           <button
             type="submit"
-            className="modern-button"
+            className="modern-button text-[15px]"
             disabled={!connected || !input.trim()}
           >
             <span className="btn-ring" />
             <span className="btn-inner flex items-center gap-2">
-              Send <Send className="w-3.5 h-3.5" />
+              Send
             </span>
-            <span className="btn-glitch r flex items-center gap-2">Send <Send className="w-3.5 h-3.5" /></span>
-            <span className="btn-glitch c flex items-center gap-2">Send <Send className="w-3.5 h-3.5" /></span>
+            <span className="btn-glitch r flex items-center gap-2">Send</span>
+            <span className="btn-glitch c flex items-center gap-2">Send</span>
           </button>
         </form>
       </div>
