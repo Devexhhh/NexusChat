@@ -24,7 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     if (wsRef.current) return;
-    const ws = new WebSocket("ws://localhost:3000/ws");
+    const ws = new WebSocket("ws://responsible-definition-selections-work.trycloudflare.com/ws");
     wsRef.current = ws;
     ws.onopen = () => { setConnected(true); };
     ws.onmessage = (event) => {
