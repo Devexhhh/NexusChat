@@ -5,7 +5,10 @@ import { attachWebSocketHandlers } from "./ws/wsHandler";
 
 const PORT = process.env.PORT || 3000;
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+const app = next({
+    dev,
+    dir: "../frontend"
+});
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
@@ -28,6 +31,8 @@ app.prepare().then(() => {
                 wss.emit("connection", ws, req);
             });
 
+        } else {
+            socket.destroy();
         }
 
     });
