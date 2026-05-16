@@ -24,7 +24,9 @@ export default function Home() {
 
   useEffect(() => {
     if (wsRef.current) return;
-    const ws = new WebSocket("wss://responsible-definition-selections-work.trycloudflare.com/ws");
+    const ws = new WebSocket(
+      process.env.NEXT_PUBLIC_WS_URL!
+    );
     wsRef.current = ws;
     ws.onopen = () => { setConnected(true); };
     ws.onmessage = (event) => {
@@ -42,7 +44,11 @@ export default function Home() {
       if (data.type === "error") { alert("⚠️ " + data.message); }
     };
     ws.onclose = () => { setConnected(false); setJoined(false); wsRef.current = null; };
+    ws.onerror = (err) => {
+      console.error("WebSocket error:", err);
+    };
     return () => { ws.close(); };
+
   }, []);
 
   function send(data: any) {
