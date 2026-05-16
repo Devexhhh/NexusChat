@@ -42,3 +42,5 @@ next-env.d.ts
 build_output.txt
 
 Dockerfile
+
+frontend/node_modules
