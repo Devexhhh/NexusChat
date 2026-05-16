@@ -1,44 +1,43 @@
 import http from "http";
-import next from "next";
 import { WebSocketServer } from "ws";
 import { attachWebSocketHandlers } from "./ws/wsHandler";
 
 const PORT = process.env.PORT || 3000;
-const dev = process.env.NODE_ENV !== "production";
-const app = next({
-    dev,
-    dir: "../frontend"
+
+const server = http.createServer((req, res) => {
+
+    res.writeHead(200);
+    res.end("WebSocket server running");
+
 });
-const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
+const wss = new WebSocketServer({
+    noServer: true
+});
 
-    const server = http.createServer((req, res) => {
-        handle(req, res);
-    });
+attachWebSocketHandlers(wss);
 
-    const wss = new WebSocketServer({ noServer: true });
+server.on("upgrade", (req, socket, head) => {
 
-    attachWebSocketHandlers(wss);
+    const url = new URL(
+        req.url!,
+        `http://${req.headers.host}`
+    );
 
-    server.on("upgrade", (req, socket, head) => {
+    if (url.pathname === "/ws") {
 
-        const url = new URL(req.url!, `http://${req.headers.host}`);
+        wss.handleUpgrade(req, socket, head, (ws) => {
+            wss.emit("connection", ws, req);
+        });
 
-        if (url.pathname === "/ws") {
+    } else {
 
-            wss.handleUpgrade(req, socket, head, (ws) => {
-                wss.emit("connection", ws, req);
-            });
+        socket.destroy();
 
-        } else {
-            socket.destroy();
-        }
+    }
 
-    });
+});
 
-    server.listen(Number(PORT), "0.0.0.0", () => {
-        console.log("Server running on port", PORT);
-    });
-
+server.listen(Number(PORT), "0.0.0.0", () => {
+    console.log(`🚀 WebSocket server running on ${PORT}`);
 });
